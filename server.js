@@ -2,6 +2,10 @@ import express from 'express';
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="en">
@@ -28,11 +32,20 @@ app.get("/users", (req, res) => {
   res.send("This is the users page");
 });
 
+app.post("/users", (req, res) => {
+  const {name, age, email, isAdmin} = req.body;
+  res.send(`Hello ${name}, your are ${age}, your email address is ${email}, and you are ${isAdmin ? "an admin" : "not an admin"}`);
+});
+
 app.get("/message", (req, res) => {
   res.send("Trains are cool!");
 });
 
-const PORT = process.env.PORT || 3000;
+app.post("/posts", (req, res) => {
+  const {title, content, attachment, username} = req.body
+  res.send(`${username} created post ${title}: ${content}
+with image ${attachment}`)
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
