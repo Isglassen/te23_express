@@ -47,6 +47,9 @@ app.post("/posts", (req, res) => {
 with image ${attachment}`)
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, (error) => {
+  if (error)
+    console.error(error)
+  else
+    console.log(`Server is running on port ${PORT}`);
 });
