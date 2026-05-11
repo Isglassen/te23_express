@@ -1,3 +1,6 @@
 node_modules
 .env
 dist/*
+tsconfig.tsbuildinfo
+
+.vscode/settings.json
