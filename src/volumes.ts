@@ -17,6 +17,7 @@ export type VolumeResponse = Omit<Volume, "chapters"> & { chapters: number[] };
 
 // TODO: Implementation
 volumesRouter.get('/', (req, res) => {
+	const { q } = req.query;
 	res.send('Get all volumes');
 });
 
@@ -41,6 +42,7 @@ volumesRouter.delete('/:id', (req, res) => {
 
 volumesRouter.get('/:id/chapters', (req, res) => {
 	const { id } = req.params;
+	const { q } = req.query;
 	res.send(`Get all chapters for volume with id ${id}`);
 });
 
@@ -52,4 +54,9 @@ volumesRouter.post('/:id/chapters', (req, res) => {
 volumesRouter.put('/:id/chapters', (req, res) => {
 	const { id } = req.params;
 	res.send(`Set list of chapters for volume with id ${id}`);
+});
+
+volumesRouter.patch('/:id', (req, res) => {
+	const { id } = req.params;
+	res.send(`Partially update volume with id ${id}`);
 });

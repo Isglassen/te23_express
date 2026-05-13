@@ -22,3 +22,7 @@ app.listen(PORT, (error) => {
   else
     console.log(`Server is running on port ${PORT}`);
 });
+
+app.once("close", () => {
+  db.close();
+})

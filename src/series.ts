@@ -17,6 +17,7 @@ export type SeriesResponse = Omit<Series, "manga"> & { manga: number[] };
 
 // TODO: Implementation
 seriesRouter.get('/', (req, res) => {
+	const { q } = req.query;
 	res.send('Get all series');
 });
 
@@ -41,6 +42,7 @@ seriesRouter.delete('/:id', (req, res) => {
 
 seriesRouter.get('/:id/manga', (req, res) => {
 	const { id } = req.params;
+	const { q } = req.query;
 	res.send(`Get all manga for series with id ${id}`);
 });
 
@@ -52,4 +54,9 @@ seriesRouter.post('/:id/manga', (req, res) => {
 seriesRouter.put('/:id/manga', (req, res) => {
 	const { id } = req.params;
 	res.send(`Set list of manga for series with id ${id}`);
+});
+
+seriesRouter.patch('/:id', (req, res) => {
+	const { id } = req.params;
+	res.send(`Partially update series with id ${id}`);
 });

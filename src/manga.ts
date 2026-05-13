@@ -17,6 +17,7 @@ export type MangaResponse = Omit<Manga, "volumes"> & { volumes: number[] };
 
 // TODO: Implementation
 mangaRouter.get('/', (req, res) => {
+	const { q } = req.query;
 	res.send('Get all manga');
 });
 
@@ -41,6 +42,7 @@ mangaRouter.delete('/:id', (req, res) => {
 
 mangaRouter.get('/:id/volumes', (req, res) => {
 	const { id } = req.params;
+	const { q } = req.query;
 	res.send(`Get all volumes for manga with id ${id}`);
 });
 
@@ -52,4 +54,9 @@ mangaRouter.post('/:id/volumes', (req, res) => {
 mangaRouter.put('/:id/volumes', (req, res) => {
 	const { id } = req.params;
 	res.send(`Set list of volumes for manga with id ${id}`);
+});
+
+mangaRouter.patch('/:id', (req, res) => {
+	const { id } = req.params;
+	res.send(`Partially update manga with id ${id}`);
 });

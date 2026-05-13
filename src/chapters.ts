@@ -13,6 +13,7 @@ export interface Chapter {
 
 // TODO: Implementation
 chaptersRouter.get('/', (req, res) => {
+	const { q } = req.query;
 	res.send('Get all chapters');
 });
 
@@ -33,4 +34,9 @@ chaptersRouter.put('/:id', (req, res) => {
 chaptersRouter.delete('/:id', (req, res) => {
 	const { id } = req.params;
 	res.send(`Delete chapter with id ${id}`);
+});
+
+chaptersRouter.patch('/:id', (req, res) => {
+	const { id } = req.params;
+	res.send(`Partially update chapter with id ${id}`);
 });
