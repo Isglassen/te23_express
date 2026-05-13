@@ -5,10 +5,6 @@ export const volumesRouter = express.Router();
 export interface Volume {
 	id: number;
 	number: number;
-	titles: {
-		standard: string;
-		translated: { lang: string; title: string }[] // Only requested languages will be included in lists
-	};
 	chapters: number;
 }
 
