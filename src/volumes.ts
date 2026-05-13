@@ -1,5 +1,4 @@
 import express from "express";
-import type { Chapter } from "./chapters.js";
 
 export const volumesRouter = express.Router();
 
@@ -10,7 +9,7 @@ export interface Volume {
 		standard: string;
 		translated: { lang: string; title: string }[] // Only requested languages will be included in lists
 	};
-	chapters: Chapter[];
+	chapters: number;
 }
 
 export type VolumeResponse = Omit<Volume, "chapters"> & { chapters: number[] };
@@ -38,22 +37,6 @@ volumesRouter.put('/:id', (req, res) => {
 volumesRouter.delete('/:id', (req, res) => {
 	const { id } = req.params;
 	res.send(`Delete volume with id ${id}`);
-});
-
-volumesRouter.get('/:id/chapters', (req, res) => {
-	const { id } = req.params;
-	const { q } = req.query;
-	res.send(`Get all chapters for volume with id ${id}`);
-});
-
-volumesRouter.post('/:id/chapters', (req, res) => {
-	const { id } = req.params;
-	res.send(`Create a new chapter for volume with id ${id}`);
-});
-
-volumesRouter.put('/:id/chapters', (req, res) => {
-	const { id } = req.params;
-	res.send(`Set list of chapters for volume with id ${id}`);
 });
 
 volumesRouter.patch('/:id', (req, res) => {
