@@ -21,8 +21,8 @@ export interface Manga {
 
 export type MangaResponse = Omit<Manga, "volumes"> & { volumes: number[] };
 
-mangaRouter.use('/:id/titles', titlesRouter);
-mangaRouter.use('/:id/volumes', volumesRouter);
+mangaRouter.use('/:mangaId/titles', titlesRouter);
+mangaRouter.use('/:mangaId/volumes', volumesRouter);
 
 mangaRouter.get('/', async (req, res) => {
 	const { q } = req.query;
