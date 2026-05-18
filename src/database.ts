@@ -25,6 +25,7 @@ export class Database {
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			language TEXT NOT NULL,
 			manga_id INTEGER,
+			official BOOLEAN NOT NULL,
 			title TEXT NOT NULL,
 			FOREIGN KEY (manga_id) REFERENCES manga (id) ON DELETE CASCADE ON UPDATE CASCADE
 		);
@@ -34,7 +35,6 @@ export class Database {
 			chapter_count INTEGER,
 			manga_id INTEGER,
 			FOREIGN KEY (manga_id) REFERENCES manga (id) ON DELETE CASCADE ON UPDATE CASCADE
-			UNIQUE (manga_id, volume_number)
 		);
 		PRAGMA foreign_keys = ON;
 		`);
