@@ -1,5 +1,7 @@
 import express from "express";
-import type { Volume } from "./volumes.js";
+import { titlesRouter } from "./mangaTitles.js";
+import { volumesRouter } from "./mangaVolumes.js";
+import DB from "./database.js";
 
 export const mangaRouter = express.Router();
 
@@ -8,55 +10,44 @@ export interface Manga {
 	author: string;
 	titles: {
 		standard: string;
-		translated: { lang: string; title: string }[] // Only requested languages will be included in lists
+		translated: { lang: string; title: string }[]
 	};
-	volumes: Volume[];
+	volumes: {
+		volumeNumber: number;
+		chapterCount: number;
+	}[];
+	totalChapters: number;
 }
 
 export type MangaResponse = Omit<Manga, "volumes"> & { volumes: number[] };
 
-// TODO: Implementation
-mangaRouter.get('/', (req, res) => {
+mangaRouter.use('/:id/titles', titlesRouter);
+mangaRouter.use('/:id/volumes', volumesRouter);
+
+mangaRouter.get('/', async (req, res) => {
 	const { q } = req.query;
-	res.send('Get all manga');
+	// TODO: Get list of all manga, optionally filtered by search query (matches any title, both standard and translated)
+	res.status(500).json({ error: "Not implemented" });
 });
 
-mangaRouter.get('/:id', (req, res) => {
+mangaRouter.get('/:id', async (req, res) => {
+	// TODO: Get detailed manga information, including all translated titles and volumes
+	res.status(500).json({ error: "Not implemented" });
+});
+
+mangaRouter.post('/', async (req, res) => {
+	// TODO: Create new manga with given properties (author, standard title, optional list of translated titles and volumes)
+	res.status(500).json({ error: "Not implemented" });
+});
+
+mangaRouter.patch('/:id', async (req, res) => {
 	const { id } = req.params;
-	res.send(`Get manga with id ${id}`);
+	// TODO: Partially update base manga properties (author, standard title). Translated titles and volumes will be updated in their respective routes
+	res.status(500).json({ error: "Not implemented" });
 });
 
-mangaRouter.post('/', (req, res) => {
-	res.send('Create a new manga');
-});
-
-mangaRouter.put('/:id', (req, res) => {
+mangaRouter.delete('/:id', async (req, res) => {
 	const { id } = req.params;
-	res.send(`Update manga with id ${id}`);
-});
-
-mangaRouter.delete('/:id', (req, res) => {
-	const { id } = req.params;
-	res.send(`Delete manga with id ${id}`);
-});
-
-mangaRouter.get('/:id/volumes', (req, res) => {
-	const { id } = req.params;
-	const { q } = req.query;
-	res.send(`Get all volumes for manga with id ${id}`);
-});
-
-mangaRouter.post('/:id/volumes', (req, res) => {
-	const { id } = req.params;
-	res.send(`Create a new volume for manga with id ${id}`);
-});
-
-mangaRouter.put('/:id/volumes', (req, res) => {
-	const { id } = req.params;
-	res.send(`Set list of volumes for manga with id ${id}`);
-});
-
-mangaRouter.patch('/:id', (req, res) => {
-	const { id } = req.params;
-	res.send(`Partially update manga with id ${id}`);
+	// TODO: Delete manga
+	res.status(500).json({ error: "Not implemented" });
 });
