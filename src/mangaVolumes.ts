@@ -128,7 +128,7 @@ volumesRouter.patch('/:volumeId', async (req: Request<{ mangaId: string; volumeI
 
 	await DB.updateMangaVolume(mangaIdNum, volumeIdNum, updates)
 
-	res.status(204).send();
+	res.status(200).send(await DB.getMangaVolume(mangaIdNum, volumeIdNum));
 });
 
 // TODO: Possibly add PUT and DELETE for entire list

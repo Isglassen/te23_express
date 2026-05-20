@@ -140,7 +140,7 @@ titlesRouter.patch('/:titleId', async (req: Request<{ mangaId: string; titleId: 
 
 	await DB.updateMangaTitle(mangaIdNum, titleIdNum, updates);
 
-	res.status(204).send();
+	res.status(200).send(await DB.getMangaTitle(mangaIdNum, titleIdNum));
 });
 
 // TODO: Possibly add PUT and DELETE for entire list

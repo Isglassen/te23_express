@@ -202,7 +202,20 @@ mangaRouter.patch('/:id', async (req, res) => {
 
 	await DB.updateManga(idNum, updates);
 	
-	res.status(204).send();
+	const manga = await DB.getManga(idNum);
+
+	if (!manga) {
+		res.status(500).json({ error: "Manga not found after update" });
+		return;
+	}
+
+	res.status(200).send({
+		id: manga.id,
+		author: manga.author,
+		titles: {
+			standard: manga.title,
+		},
+	} as Omit<Manga, "volumes">);
 });
 
 mangaRouter.delete('/:id', async (req, res) => {
