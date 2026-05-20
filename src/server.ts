@@ -2,6 +2,8 @@ import express from 'express';
 import db from './database.js';
 import { mangaRouter } from './manga.js';
 
+export const ID_REGEX = /^\d+$/;
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
