@@ -70,9 +70,18 @@ volumesRouter.post('/', async (req: Request<{ mangaId: string }>, res) => {
 		return;
 	}
 
-	const [volumeId] = await DB.createMangaVolumes(mangaIdNum, [{ volumeNumber: body.volumeNumber, chapterCount: body.chapterCount }]);
+	try {
+		const [volumeId] = await DB.createMangaVolumes(mangaIdNum, [{ volumeNumber: body.volumeNumber, chapterCount: body.chapterCount }]);
 
-	res.status(201).json({ id: volumeId });
+		res.status(201).json({ id: volumeId });
+	} catch(error) {
+		console.error(error);
+		if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'SQLITE_CONSTRAINT') {
+			res.status(400).json({ error: "Conflict in volume numbers" });
+			return;
+		}
+		res.status(500).json({ error: "Internal server error" });
+	}
 });
 
 volumesRouter.delete('/:volumeId', async (req: Request<{ mangaId: string; volumeId: string }>, res) => {
@@ -126,9 +135,18 @@ volumesRouter.patch('/:volumeId', async (req: Request<{ mangaId: string; volumeI
 		updates.chapterCount = body.chapterCount;
 	}
 
-	await DB.updateMangaVolume(mangaIdNum, volumeIdNum, updates)
+	try {
+		await DB.updateMangaVolume(mangaIdNum, volumeIdNum, updates)
 
-	res.status(200).send(await DB.getMangaVolume(mangaIdNum, volumeIdNum));
+		res.status(200).send(await DB.getMangaVolume(mangaIdNum, volumeIdNum));
+	} catch(error) {
+		console.error(error);
+		if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'SQLITE_CONSTRAINT') {
+			res.status(400).json({ error: "Conflict in volume numbers" });
+			return;
+		}
+		res.status(500).json({ error: "Internal server error" });
+	}
 });
 
 // TODO: Possibly add PUT and DELETE for entire list

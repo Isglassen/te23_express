@@ -151,12 +151,25 @@ mangaRouter.post('/', async (req, res) => {
 		}
 	}
 
-	const mangaId = await DB.createManga(body.titles.standard, body.author);
-	const promises: Promise<number[]>[] = [];
-	promises.push(DB.createMangaTitles(mangaId, translatedTitles));
-	promises.push(DB.createMangaVolumes(mangaId, volumes))
-	const [translatedTitleIds, volumeIds] = await Promise.all(promises);
-	res.status(201).json({ id: mangaId, volumeIds, titleIds: translatedTitleIds });
+	await DB.transaction();
+	try {
+		const mangaId = await DB.createManga(body.titles.standard, body.author);
+		const promises: Promise<number[]>[] = [];
+		promises.push(DB.createMangaTitles(mangaId, translatedTitles));
+		promises.push(DB.createMangaVolumes(mangaId, volumes))
+		const [translatedTitleIds, volumeIds] = await Promise.all(promises);
+		await DB.commit();
+
+		res.status(201).json({ id: mangaId, volumeIds, titleIds: translatedTitleIds });
+	} catch (error) {
+		await DB.rollback();
+		console.error(error);
+		if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'SQLITE_CONSTRAINT') {
+			res.status(400).json({ error: "Conflict in volume numbers" });
+			return;
+		}
+		res.status(500).json({ error: "Internal server error" });
+	}
 });
 
 mangaRouter.patch('/:id', async (req, res) => {

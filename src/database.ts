@@ -2,6 +2,7 @@ import sqlite3 from "sqlite3";
 
 export class Database {
 	public db: sqlite3.Database;
+	private inTransaction: boolean = false;
 	
 	constructor(filename: string) {
 		this.db = new sqlite3.Database(filename, (err) => {
@@ -34,10 +35,53 @@ export class Database {
 			volume_number REAL NOT NULL,
 			chapter_count INTEGER NOT NULL,
 			manga_id INTEGER NOT NULL,
-			FOREIGN KEY (manga_id) REFERENCES manga (id) ON DELETE CASCADE ON UPDATE CASCADE
+			FOREIGN KEY (manga_id) REFERENCES manga (id) ON DELETE CASCADE ON UPDATE CASCADE,
+			UNIQUE (manga_id, volume_number)
 		);
 		PRAGMA foreign_keys = ON;
 		`);
+	}
+
+	public async transaction(): Promise<void> {
+		if (this.inTransaction) return;
+		return new Promise((resolve, reject) => {
+			this.db.run('BEGIN TRANSACTION', (err) => {
+				if (err) {
+					reject(err);
+				} else {
+					this.inTransaction = true;
+					resolve();
+				}
+			});
+		});
+	}
+
+	public async commit(): Promise<void> {
+		if (!this.inTransaction) return;
+		return new Promise((resolve, reject) => {
+			this.db.run('COMMIT', (err) => {
+				if (err) {
+					reject(err);
+				} else {
+					this.inTransaction = false;
+					resolve();
+				}
+			});
+		});
+	}
+
+	public async rollback(): Promise<void> {
+		if (!this.inTransaction) return;
+		return new Promise((resolve, reject) => {
+			this.db.run('ROLLBACK', (err) => {
+				if (err) {
+					reject(err);
+				} else {
+					this.inTransaction = false;
+					resolve();
+				}
+			});
+		});
 	}
 
 	public close() {
@@ -169,7 +213,8 @@ export class Database {
 	}
 
 	async createMangaTitles(mangaId: number, titles: {title: string, lang: string, official: boolean}[]): Promise<number[]> {
-		return new Promise((resolve, reject) => {
+		await this.transaction();
+		const result = await new Promise<number[]>((resolve, reject) => {
 			const promises: Promise<number>[] = [];
 			for (const title of titles) {
 				promises.push(new Promise((resolve, reject) => {
@@ -188,6 +233,8 @@ export class Database {
 			}
 			Promise.all(promises).then(resolve).catch(reject);
 		});
+		await this.commit();
+		return result;
 	}
 
 	async updateMangaTitle(mangaId: number, titleId: number, { title, lang, official }: { title?: string; lang?: string; official?: boolean }): Promise<void> {
@@ -262,7 +309,8 @@ export class Database {
 	}
 
 	async createMangaVolumes(mangaId: number, volumes: {volumeNumber: number, chapterCount: number}[]): Promise<number[]> {
-		return new Promise((resolve, reject) => {
+		await this.transaction();
+		const result = await new Promise<number[]>((resolve, reject) => {
 			const promises: Promise<number>[] = [];
 			for (const volume of volumes) {
 				promises.push(new Promise((resolve, reject) => {
@@ -281,6 +329,8 @@ export class Database {
 			}
 			Promise.all(promises).then(resolve).catch(reject);
 		});
+		await this.commit();
+		return result;
 	}
 
 	async updateMangaVolume(mangaId: number, volumeId: number, { volumeNumber, chapterCount }: { volumeNumber?: number; chapterCount?: number }): Promise<void> {
@@ -304,6 +354,7 @@ export class Database {
 			const sql = `UPDATE manga_volumes SET ${fields.join(', ')} WHERE manga_id = ? AND id = ?`;
 			this.db.run(sql, params, function(err) {
 				if (err) {
+					console.error(err);
 					reject(err);
 				} else {
 					resolve();

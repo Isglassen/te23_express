@@ -19,6 +19,11 @@ app.listen(PORT, (error) => {
     console.log(`Server is running on port ${PORT}`);
 });
 
+app.use((err: any, req: express.Request, res: express.Response) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal server error" });
+});
+
 app.once("close", () => {
   db.close();
 })
