@@ -138,6 +138,11 @@ titlesRouter.patch('/:titleId', async (req: Request<{ mangaId: string; titleId: 
 		return;
 	}
 
+	if (!DB.getMangaTitle(mangaIdNum, titleIdNum)) {
+		res.status(404).json({ error: "Title not found" });
+		return;
+	}
+
 	await DB.updateMangaTitle(mangaIdNum, titleIdNum, updates);
 
 	res.status(200).send(await DB.getMangaTitle(mangaIdNum, titleIdNum));

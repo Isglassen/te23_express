@@ -213,6 +213,11 @@ mangaRouter.patch('/:id', async (req, res) => {
 		}
 	}
 
+	if (!DB.mangaExists(idNum)) {
+		res.status(404).json({ error: "Manga not found" });
+		return;
+	}
+
 	await DB.updateManga(idNum, updates);
 	
 	const manga = await DB.getManga(idNum);

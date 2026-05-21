@@ -135,6 +135,11 @@ volumesRouter.patch('/:volumeId', async (req: Request<{ mangaId: string; volumeI
 		updates.chapterCount = body.chapterCount;
 	}
 
+	if (!await DB.getMangaVolume(mangaIdNum, volumeIdNum)) {
+		res.status(404).json({ error: "Volume not found" });
+		return;
+	}
+
 	try {
 		await DB.updateMangaVolume(mangaIdNum, volumeIdNum, updates)
 
