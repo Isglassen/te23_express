@@ -1,0 +1,1425 @@
+{
+  "info": {
+    "_postman_id": "216dbd95-7cbe-45fc-8b87-7105d75541da",
+    "name": "Manga List API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53607135",
+    "_collection_link": "https://go.postman.co/collection/53607135-216dbd95-7cbe-45fc-8b87-7105d75541da?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Titles",
+      "item": [
+        {
+          "name": "All Titles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/titles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "titles"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "",
+                  "description": "Id of the manga to get titles of"
+                }
+              ]
+            },
+            "description": "Returns all titles of a specific manga\n\n``` typescript\n{\n  id: number;\n  lang: string;\n  title: string;\n  official: boolean;\n}[]\n\n ```"
+          },
+          "response": [
+            {
+              "name": "Manga 1",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to get titles of"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Specific Title",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "titles",
+                ":titleId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "",
+                  "description": "Id of the manga the title is in"
+                },
+                {
+                  "key": "titleId",
+                  "value": "",
+                  "description": "Id of the title to get"
+                }
+              ]
+            },
+            "description": "Returns a specific title\n\n``` typescript\n{\n  id: number;\n  lang: string;\n  title: string;\n  official: boolean;\n}\n\n ```"
+          },
+          "response": [
+            {
+              "name": "Manga 1-2",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles",
+                    ":titleId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga the title is in"
+                    },
+                    {
+                      "key": "titleId",
+                      "value": "2",
+                      "description": "Id of the title to get"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Add Title",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"テスト\",\r\n    \"lang\": \"ja\",\r\n    \"official\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/titles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "titles"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to add title to"
+                }
+              ]
+            },
+            "description": "Adds a title to a manga.\n\nRequires string fields `lang`, `title` and boolean field `official`.\n\nReturns an object with the `id` of the created title."
+          },
+          "response": [
+            {
+              "name": "[ERR] Missing Body",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to add title to"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "Add Title",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"テスト\",\r\n    \"lang\": \"ja\",\r\n    \"official\": false\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to add title to"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Modify Title",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"テスト\",\r\n    \"lang\": \"ja\",\r\n    \"official\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "titles",
+                ":titleId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to modify a title of."
+                },
+                {
+                  "key": "titleId",
+                  "value": "",
+                  "description": "Id of the title to modify"
+                }
+              ]
+            },
+            "description": "Modifies and existing title.\n\nAccepts an object with any of the following fields\n\n- `lang`: String with the language code of the title language.\n    \n- `title`: String of the title.\n    \n- `official`: Boolean showing if the title is an official translation.\n    \n\nResponds with an object with both of these fields and and `id` field, representing the new object."
+          },
+          "response": [
+            {
+              "name": "[ERR] Body is not json",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "yfiodxfihotdrjghujhxfihjmftklgmfgukyjwejmrgh",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles",
+                    ":titleId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to modify a title of."
+                    },
+                    {
+                      "key": "titleId",
+                      "value": "1",
+                      "description": "Id of the title to modify"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "1-2 Official",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"official\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles",
+                    ":titleId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to modify a title of."
+                    },
+                    {
+                      "key": "titleId",
+                      "value": "2",
+                      "description": "Id of the title to modify"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Remove Title",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "titles",
+                ":titleId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to remove the title from."
+                },
+                {
+                  "key": "titleId",
+                  "value": "",
+                  "description": "Id of the title to remove"
+                }
+              ]
+            },
+            "description": "Removes a title from a manga"
+          },
+          "response": [
+            {
+              "name": "Remove 1-1",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/titles/:titleId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "titles",
+                    ":titleId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to remove the title from."
+                    },
+                    {
+                      "key": "titleId",
+                      "value": "1",
+                      "description": "Id of the title to remove"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Volumes",
+      "item": [
+        {
+          "name": "All Volumes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/volumes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "volumes"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "2",
+                  "description": "Id of the manga to get volumes of"
+                }
+              ]
+            },
+            "description": "Returns all volumes of a specific manga, sorted by `volumeNumber` ascending\n\n``` typescript\n{\n  id: number;\n  volumeNumber: number;\n  chapterCount: number;\n}[]\n\n ```"
+          },
+          "response": [
+            {
+              "name": "Manga 3",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "3",
+                      "description": "Id of the manga to get volumes of"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": "",
+              "header": [],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Specific Volume",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "volumes",
+                ":volumeId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga the volume is in"
+                },
+                {
+                  "key": "volumeId",
+                  "value": "",
+                  "description": "Id of the volume to get"
+                }
+              ]
+            },
+            "description": "Returns a specific volume\n\n``` typescript\n{\n  id: number;\n  volumeNumber: number;\n  chapterCount: number;\n}\n\n ```"
+          },
+          "response": [
+            {
+              "name": "Manga 1: 1",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes",
+                    ":volumeId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga the volume is in"
+                    },
+                    {
+                      "key": "volumeId",
+                      "value": "1",
+                      "description": "Id of the volume to get"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Add Volume",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"volumeNumber\": 1,\r\n    \"chapterCount\": 30\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/volumes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "volumes"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to add a volume to"
+                }
+              ]
+            },
+            "description": "Adds a volume to a manga\n\nRequires two fields, the `volumeNumber` allowed to have decimals and the `chapterCount` which has to be an int.\n\nResponds with an object with `id` being the id of the created volume"
+          },
+          "response": [
+            {
+              "name": "[ERR] Number conflict",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"volumeNumber\": 1,\r\n    \"chapterCount\": 30\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to add a volume to"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "New for manga 1",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"volumeNumber\": 1.5,\r\n    \"chapterCount\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to add a volume to"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Modify Volume",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"chapterCount\": 5\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "volumes",
+                ":volumeId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "2",
+                  "description": "Id of the manga to modify a volume in"
+                },
+                {
+                  "key": "volumeId",
+                  "value": "5",
+                  "description": "The id of the volume to modify"
+                }
+              ]
+            },
+            "description": "Modifies and existing volume.\n\nAccepts an object with any of the following fields\n\n- `volumeNumber`: Any number, decimals allowed\n    \n- `chapterCount`: An integer\n    \n\nResponds with an object with both of these fields and and `id` field, representing the new object."
+          },
+          "response": [
+            {
+              "name": "[ERR] Not found",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"chapterCount\": 5\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes",
+                    ":volumeId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "9999",
+                      "description": "Id of the manga to remove modify a volume in"
+                    },
+                    {
+                      "key": "volumeId",
+                      "value": "9999",
+                      "description": "The id of the volume to modify"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            },
+            {
+              "name": "Chapters 1-1",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"chapterCount\": 30\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes",
+                    ":volumeId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "1",
+                      "description": "Id of the manga to modify a volume in"
+                    },
+                    {
+                      "key": "volumeId",
+                      "value": "1",
+                      "description": "The id of the volume to modify"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Remove Volume",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId",
+                "volumes",
+                ":volumeId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "2",
+                  "description": "Id of the manga to remove a volume from"
+                },
+                {
+                  "key": "volumeId",
+                  "value": "6",
+                  "description": "The id of the volume to remove"
+                }
+              ]
+            },
+            "description": "Removes a volume from a manga"
+          },
+          "response": [
+            {
+              "name": "Remove 2-3",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/manga/:mangaId/volumes/:volumeId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "manga",
+                    ":mangaId",
+                    "volumes",
+                    ":volumeId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "mangaId",
+                      "value": "2",
+                      "description": "Id of the manga to remove a volume from"
+                    },
+                    {
+                      "key": "volumeId",
+                      "value": "3",
+                      "description": "The id of the volume to remove"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "All Manga",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/manga",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "manga"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "test",
+              "description": "Search string to filter for titles and authors.",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Returns a list of objects representing all manga.\n\nIf q is provided, only returns those where q appears in `author`, `titles.standard`, or any `titles.translated[i].title`.\n\n``` typescript\n{\n  id: number;\n  author: string;\n  titles: {\n    standard: string;\n    translated: {\n      lang: string;\n      title: string;\n      official: boolean;\n    }[]\n  }\n  volumes: {\n    chapterCount: number;\n    volumeNumber: number;\n  }\n  totalChapters: number;\n}[]\n\n ```"
+      },
+      "response": [
+        {
+          "name": "No search",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "test",
+                  "description": "Search string to filter for titles and authors.",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Search 1",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga?q=test",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "test",
+                  "description": "Search string to filter for titles and authors."
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Search 2",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga?q=prov",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "prov",
+                  "description": "Search string to filter for titles and authors."
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Specific Manga",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/manga/:mangaId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "manga",
+            ":mangaId"
+          ],
+          "variable": [
+            {
+              "key": "mangaId",
+              "value": "2",
+              "description": "Id of the manga to get"
+            }
+          ]
+        },
+        "description": "Returns an object representing a specific manga and all of it's subobjects.\n\n``` typescript\n{\n  id: number;\n  author: string;\n  titles: {\n    standard: string;\n    translated: {\n      lang: string;\n      title: string;\n      official: boolean;\n    }[]\n  }\n  volumes: {\n    chapterCount: number;\n    volumeNumber: number;\n  }\n  totalChapters: number;\n}\n\n ```"
+      },
+      "response": [
+        {
+          "name": "[ERR] Bad Id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "asd",
+                  "description": "Id of the manga to get"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Manga 1",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to get"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Manga 2",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "2",
+                  "description": "Id of the manga to get"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Create Manga",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"author\": \"Author 3\",\r\n    \"titles\": {\r\n        \"standard\": \"Provider\",\r\n        \"translated\": []\r\n    },\r\n    \"volumes\": [\r\n        {\"volumeNumber\": 1, \"chapterCount\": 54},\r\n        {\"volumeNumber\": 1.5, \"chapterCount\": 2},\r\n        {\"volumeNumber\": 2, \"chapterCount\": 47}\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/manga",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "manga"
+          ]
+        },
+        "description": "Creates the manga and any titles and volumes if provided.\n\nRequires the fields `author` and `titles.standard`, as well as optional fields `volumes` and `titles.translated`.\n\n`volumes` should be an array of objects with fields `volumeNumber` and `chapterCount`. `volumeNumber` is allowed to have decimals.\n\n`titles.translated` should be and array of objects with string fields `lang` and `title` and a boolean field `official`.\n\nResponds with an object with fields:\n\n- `id`: The id of the created manga\n    \n- `volumeIds`: The ids of all created volumes, in the same order as provided.\n    \n- `titleIds`: The ids of all created titles, in the same order as provided."
+      },
+      "response": [
+        {
+          "name": "[ERR] Missing fields",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"author\": \"New Author\",\r\n    \"volumes\": [\r\n        {\"volumeNumber\": 1, \"chapterCount\": 40}\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga"
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Create Manga",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"author\": \"New Author\",\r\n    \"titles\": {\r\n        \"standard\": \"New Manga\",\r\n        \"translated\": [\r\n            {\"lang\": \"en\", \"title\": \"New Manga\", \"official\": true},\r\n            {\"lang\": \"jp\", \"title\": \"新しい漫画\", \"official\": true}\r\n        ]\r\n    },\r\n    \"volumes\": [\r\n        {\"volumeNumber\": 1, \"chapterCount\": 23},\r\n        {\"volumeNumber\": 2, \"chapterCount\": 20}\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga"
+              ]
+            }
+          },
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Modify Manga",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"author\": \"Teto\",\r\n    \"titles\": {\r\n        \"standard\": \"Tesuto\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/manga/:mangaId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "manga",
+            ":mangaId"
+          ],
+          "variable": [
+            {
+              "key": "mangaId",
+              "value": "1",
+              "description": "Id of the manga to modify"
+            }
+          ]
+        },
+        "description": "Modifies the existing item and updates the provided fields to their new values.\n\nAccepts fields `author` and `titles.standard`, none required.\n\nResponds with a partial version of the response for GET on this url, with only the fields `id`, `author`, and `titles.standard`, representing the new state of the object."
+      },
+      "response": [
+        {
+          "name": "[ERR] Wrong data type",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"author\": 2,\r\n    \"titles\": {\r\n        \"standard\": false\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to modify"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Rename Manga 2",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"titles\": {\r\n        \"standard\": \"Rubrik\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "2",
+                  "description": "Id of the manga to modify"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        },
+        {
+          "name": "Change Author 1",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"author\": \"Författaren\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "1",
+                  "description": "Id of the manga to modify"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Delete Manga",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/manga/:mangaId",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "manga",
+            ":mangaId"
+          ],
+          "variable": [
+            {
+              "key": "mangaId",
+              "value": "1",
+              "description": "Id of the manga to delete"
+            }
+          ]
+        },
+        "description": "Deletes a manga and all related database objects."
+      },
+      "response": [
+        {
+          "name": "Delete Manga 4",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manga/:mangaId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "manga",
+                ":mangaId"
+              ],
+              "variable": [
+                {
+                  "key": "mangaId",
+                  "value": "4",
+                  "description": "Id of the manga to delete"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    }
+  ]
+}

@@ -15,6 +15,7 @@ export class Database {
 		this.initialize();
 	}
 
+	// FIXME: Would be logical to have UNIQUE (manga_id, language, title). Can't bother now
 	public initialize() {
 		this.db.exec(`
 		CREATE TABLE IF NOT EXISTS manga (
@@ -44,12 +45,12 @@ export class Database {
 
 	public async transaction(): Promise<void> {
 		if (this.inTransaction) return;
+		this.inTransaction = true;
 		return new Promise((resolve, reject) => {
 			this.db.run('BEGIN TRANSACTION', (err) => {
 				if (err) {
 					reject(err);
 				} else {
-					this.inTransaction = true;
 					resolve();
 				}
 			});
@@ -58,12 +59,12 @@ export class Database {
 
 	public async commit(): Promise<void> {
 		if (!this.inTransaction) return;
+		this.inTransaction = false;
 		return new Promise((resolve, reject) => {
 			this.db.run('COMMIT', (err) => {
 				if (err) {
 					reject(err);
 				} else {
-					this.inTransaction = false;
 					resolve();
 				}
 			});
@@ -72,12 +73,12 @@ export class Database {
 
 	public async rollback(): Promise<void> {
 		if (!this.inTransaction) return;
+		this.inTransaction = false;
 		return new Promise((resolve, reject) => {
 			this.db.run('ROLLBACK', (err) => {
 				if (err) {
 					reject(err);
 				} else {
-					this.inTransaction = false;
 					resolve();
 				}
 			});
@@ -103,7 +104,7 @@ export class Database {
 
 	async getAllManga(query?: string): Promise<{ id: number; title: string; author: string }[]> {
 		return new Promise((resolve, reject) => {
-			const query_where = ' WHERE title LIKE ? OR author LIKE ? OR EXISTS (SELECT 1 FROM manga_titles WHERE manga_titles.manga_id = manga.id AND title LIKE ?)';
+			const query_where = ' WHERE title LIKE ? COLLATE NOCASE OR author LIKE ? COLLATE NOCASE OR EXISTS (SELECT 1 FROM manga_titles WHERE manga_titles.manga_id = manga.id AND title LIKE ? COLLATE NOCASE)';
 			const sql = `SELECT id, title, author FROM manga${query ? query_where : ''}`;
 			const params = query ? [`%${query}%`, `%${query}%`, `%${query}%`] : [];
 			this.db.all(sql, params, (err, rows: { id: number; title: string; author: string }[]) => {
